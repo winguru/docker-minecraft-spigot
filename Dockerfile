@@ -51,6 +51,10 @@ RUN java -jar BuildTools.jar --rev ${MC_VERSION}
 # Base image is the OpenJDK Java Runtime Slim (Headless) environment
 FROM   openjdk:8-jre-slim
 
+# Set requested version of Minecraft to build
+ARG MC_VERSION=1.12.2
+ENV MC_VERSION ${MC_VERSION}
+
 # Set location of Minecraft server files
 ARG MC_DIR=/opt/spigot
 
