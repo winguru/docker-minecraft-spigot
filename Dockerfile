@@ -39,7 +39,7 @@ RUN wget https://hub.spigotmc.org/jenkins/job/BuildTools/lastSuccessfulBuild/art
 ENV _JAVA_OPTIONS -Djdk.net.URLClassPath.disableClassPathURLCheck=true
 
 # Set requested version of Minecraft to build
-ARG MC_VERSION=1.12.2
+ARG MC_VERSION=1.13.2
 ENV MC_VERSION ${MC_VERSION}
 
 RUN java -jar BuildTools.jar --rev ${MC_VERSION}
@@ -52,7 +52,7 @@ RUN java -jar BuildTools.jar --rev ${MC_VERSION}
 FROM   openjdk:8-jre-slim
 
 # Set requested version of Minecraft to build
-ARG MC_VERSION=1.12.2
+ARG MC_VERSION=1.13.2
 ENV MC_VERSION ${MC_VERSION}
 
 # Set location of Minecraft server files
