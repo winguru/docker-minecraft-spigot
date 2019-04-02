@@ -19,7 +19,6 @@ start_spigot() {
 	java \
 		-d64 \
 		-Xms1G -Xmx8G \
-		-XX:MaxPermSize=128M \
 		-jar ../spigot-${MC_VERSION}.jar \
 		-o true \
 		nogui \
