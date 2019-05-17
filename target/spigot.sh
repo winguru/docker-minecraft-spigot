@@ -1,5 +1,13 @@
 #!/bin/sh
 
+check_data() {
+	if [ ! -d data ]
+	then
+		mkdir data
+	fi
+	cd data
+}
+
 check_eula() {
 	if [ ! -f eula.txt ]
 	then
@@ -11,10 +19,10 @@ start_spigot() {
 	java \
 		-d64 \
 		-Xms1G -Xmx8G \
-		-XX:MaxPermSize=128M \
-		-jar spigot-${MC_VERSION}.jar \
+		-jar ../spigot-${MC_VERSION}.jar \
 		-o true \
-		nogui
+		nogui \
+		-W worlds
 }
 
 if [ -z "${MC_VERSION}" ]; then
@@ -24,6 +32,7 @@ fi
 BINDIR=$(dirname "$(readlink -fn "$0")")
 cd "$BINDIR"
 
+check_data
 check_eula
 while true
 	do
