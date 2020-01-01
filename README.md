@@ -30,7 +30,7 @@ To verify that the docker-compose file works properly, run the following command
 Type `CTRL-C` to stop the minecraft container</br>
 
 ## Startup script using docker-compose and screen
-Here is a sample `start.sh` BASH script file that uses the above `docker-compose.yml` file and **screen** to manage the server:
+Here is a sample `start.sh` BASH script file included in the `run` directory that uses the above `docker-compose.yml` file and **screen** to manage the server:
 <pre>
 #!/bin/bash
 SCREEN='spigot'
@@ -48,10 +48,10 @@ else
   echo Existing ${NAME} session decteded... Aborted!
 fi
 </pre>
-To start the server, run the following command:</br>
-`./start.sh`</br>
+To start the server in a background screen session, run the following command:</br>
+`run/start.sh`</br>
 
-To connect to the server with screen, run the following command:</br>
+To connect to the server with **screen**, run the following command:</br>
 `screen -r spigot`
 
 To detach from the screen session, type `CTRL-A`, `CTRL-D`.
