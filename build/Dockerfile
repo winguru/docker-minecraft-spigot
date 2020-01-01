@@ -3,6 +3,9 @@
 #
 # Builds a docker image for building a Minecraft Spigot server
 # (https://www.spigotmc.org/)
+# 
+# To see the latest build versions available, check here:
+# https://www.spigotmc.org/wiki/buildtools/#versions
 # -----------------------------------------------------------------------------
 
 # -----------------------------------------------------------------------------
@@ -39,10 +42,10 @@ RUN wget https://hub.spigotmc.org/jenkins/job/BuildTools/lastSuccessfulBuild/art
 ENV _JAVA_OPTIONS -Djdk.net.URLClassPath.disableClassPathURLCheck=true
 
 # Set requested version of Minecraft to build
-ARG MC_VERSION=1.14.4
+ARG MC_VERSION=1.15.1
 ENV MC_VERSION ${MC_VERSION}
 
-RUN java -jar BuildTools.jar --rev ${MC_VERSION}
+RUN java -Xmx1024M -jar BuildTools.jar --rev ${MC_VERSION}
 
 # -----------------------------------------------------------------------------
 # Second-stage build for minecraft-spigot image
@@ -52,7 +55,7 @@ RUN java -jar BuildTools.jar --rev ${MC_VERSION}
 FROM   openjdk:8-jre-slim
 
 # Set requested version of Minecraft to build
-ARG MC_VERSION=1.14.4
+ARG MC_VERSION=1.15.1
 ENV MC_VERSION ${MC_VERSION}
 
 # Set location of Minecraft server files
@@ -61,7 +64,7 @@ ARG MC_DIR=/opt/spigot
 RUN mkdir -p ${MC_DIR}/data
 
 COPY --from=builder [ "spigot-${MC_VERSION}.jar", "${MC_DIR}/" ]
-COPY [ "spigot.sh", "${MC_DIR}/" ]
+COPY [ "target/spigot.sh", "${MC_DIR}/" ]
 
 RUN ln -s ${MC_DIR}/spigot.sh .
 

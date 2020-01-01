@@ -1,0 +1,14 @@
+#
+# Launches Minecraft Spigot/CraftBukkit Server
+#
+# - Docker-compose 1.16 (min) required
+#
+version: '2.4'
+services:
+  spigot:
+    image: "winguru/minecraft-spigot:latest"
+    restart: always
+    ports:
+      - "25565:25565" # Minecraft server port
+    volumes:
+      - ./volumes/spigot-data/:/opt/spigot/data
